@@ -11,7 +11,6 @@ node server.js
 ```
 
 # Endpoints
-adsfsadf
 
 ## GET `/`
 Affiche des informations à propos du service
@@ -22,9 +21,12 @@ Retourne la configuration
 Valeurs par défaut des paramètres de configuration: 
 ```javascript
 let configuration = {
-    url: "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod/?string=laval",
-    nbTime: 20
-}
+        "url": "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod?string=radar",
+        "nbTime": 5,
+        "sleepTime": 100,
+        "showResponse": true,
+        "appendUuid": false
+    }
 ```
 
 ## POST `/config`
@@ -39,7 +41,7 @@ Retourne le resultat d'exécution. Par exemple:
     [
         {
             "counter": 1,
-            "url": "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod/?string=laval",
+            "url": "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod?string=laval",
             "second": 0,
             "millisecond": 510.813041
         }
