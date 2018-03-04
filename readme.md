@@ -44,19 +44,19 @@ Retourne le resultat d'exécution. Par exemple:
 ## GET `/stop`
 Arrête le test
 
-# Pour démarrer plusieurs services à la fois (bash)
-```sh
-node server.js 2000 &
-node server.js 2001 &
-node server.js 2002 &
-```
-
-## Installation et éxcution locale
+# Installation et éxcution locale
 ```
 git clone https://github.com/julien-riel/api-tester.git
 cd api-tester
 npm install
 npm start
+```
+
+# Pour démarrer plusieurs services à la fois (bash)
+```sh
+npm start 2000 &
+npm start 2001 &
+npm start 2002 &
 ```
 
 # Docker
