@@ -1,7 +1,6 @@
 const express = require('express');
 const requestSA = require('superagent');
 const bodyParser = require('body-parser')
-const request = require('sync-request');
 
 // Configure server
 const app = express();
@@ -11,8 +10,7 @@ app.use(bodyParser.json());
 let remoteConfig = {
     object : {
         url: "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod/?string=laval",
-        nbTime: 20,
-        async: true
+        nbTime: 20
     }
 };
 let running = false;
@@ -31,23 +29,9 @@ function addTimer(counter, url, startTimer) {
             counter: counter,
             url: url,
             second: endTimer[0],
-            millisecond: endTimer[1]/1000000,
-            async: remoteConfig.object.async ? "true" : "false"
+            millisecond: endTimer[1]/1000000
         }
     ]);
-}
-
-function callService(res) {
-
-    while (callCounter < remoteConfig.object.nbTime) {
-        callCounter++;
-        let startTimer = process.hrtime()
-        console.log('Un appel SYNC' + callCounter );
-        addTimer(callCounter, remoteConfig.object.url, startTimer);
-        request('GET', remoteConfig.object.url);
-    }
-
-    respond(res);
 }
 
 function callServiceAsync(res) {
@@ -60,7 +44,7 @@ function callServiceAsync(res) {
         if (apiErr) {throw apiErr;}
         callCounter++;
         addTimer(callCounter, remoteConfig.object.url, startTimer);
-        console.log('Un appel ASYNC', apiResponse );
+        console.log('calling ', remoteConfig.object.url);
         if (running && callCounter < remoteConfig.object.nbTime) {
             setImmediate(() => {callServiceAsync(res);})
         } else {
@@ -72,11 +56,7 @@ function callServiceAsync(res) {
 function start(req, res) {
     running = true;
     callCounter = 0;
-    if (remoteConfig.object.async) {
-        callServiceAsync(res)
-    } else {
-        callService(res)
-    }
+    callServiceAsync(res)
 }
 
 function stop(req, res) {

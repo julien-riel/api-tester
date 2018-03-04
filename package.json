@@ -18,7 +18,7 @@
   "homepage": "https://github.com/julien-riel/api-tester#readme",
   "dependencies": {
     "config": "^1.30.0",
-    "superagent": "^3.8.2",
-    "sync-request": "^5.0.0"
+    "express": "^4.16.2",
+    "superagent": "^3.8.2"
   }
 }
