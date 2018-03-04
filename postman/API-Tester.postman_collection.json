@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "API-Tester",
+		"_postman_id": "a959dc60-9da2-4f38-4839-78af0d839e48",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Check Configuration",
+			"request": {
+				"url": "{{tester_url}}/config",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    url: \"https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod/\",\r\n    nbTime: 20\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Change Configuration",
+			"request": {
+				"url": "{{tester_url}}/config",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod?string=radar\",\n    \"nbTime\": 5,\n    \"sleepTime\": 100,\n    \"showResponse\": false,\n    \"appendUuid\": true\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Start Test",
+			"request": {
+				"url": "{{tester_url}}/start",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Test",
+			"request": {
+				"url": "{{tester_url}}/stop",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
