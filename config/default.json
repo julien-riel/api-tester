@@ -1,0 +1,9 @@
+{
+    "remoteConfig": {
+        "url": "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod?string=radar",
+        "nbTime": 5,
+        "sleepTime": 100,
+        "showResponse": true,
+        "appendUuid": false
+    }
+}

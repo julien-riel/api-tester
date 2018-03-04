@@ -1,6 +1,8 @@
+const config = require('config');
 const express = require('express');
 const requestSA = require('superagent');
 const bodyParser = require('body-parser');
+const uuidv4 = require('uuid/v4');
 
 // Configure server
 const app = express();
@@ -12,11 +14,7 @@ console.log('Détection du port:', port);
 
 // Les valeurs par défaut de l'application
 let remoteConfig = {
-    object : {
-        url: "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod/?string=laval",
-        nbTime: 5,
-        sleepTime: 100
-    }
+    object : config.get('remoteConfig')
 };
 let running = false;
 let callCounter = 0;
@@ -47,17 +45,27 @@ function addTestResult(counter, url, startTimer) {
 
 // Exécution d'un test. Appeller le url, noter les résultats et continuer
 function doOneTestAndContinue(res) {
-    
+
     let startTimer = process.hrtime();
+    
     let url = remoteConfig.object.url; 
+    if (remoteConfig.object.appendUuid == true) {
+        url += "&uuid=" + uuidv4();
+    }
+
+    console.log(callCounter + ' - Calling:', url);
+    
     requestSA
     .get(url)
     .end((apiErr, apiResponse) => {
         if (apiErr) {throw apiErr;}
+
+        if (remoteConfig.object.showResponse == true) {
+            console.log(apiResponse.status + ' ' + apiResponse.body);
+        } 
         
         callCounter++;
         addTestResult(callCounter, url, startTimer);
-        console.log(callCounter + ' - calling ', url);
         
         if (running && callCounter < remoteConfig.object.nbTime) {
             setTimeout(() => {doOneTestAndContinue(res);}, remoteConfig.object.sleepTime);
