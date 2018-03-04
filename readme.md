@@ -2,14 +2,6 @@
 
 Service pour appeler en boucle un url et mesurer les performances
 
-## Installation
-```
-git clone https://github.com/julien-riel/api-tester.git
-cd api-tester
-npm install
-node server.js
-```
-
 # Endpoints
 
 ## GET `/`
@@ -51,3 +43,33 @@ Retourne le resultat d'exécution. Par exemple:
 
 ## GET `/stop`
 Arrête le test
+
+# Pour démarrer plusieurs services à la fois (bash)
+```sh
+node server.js 2000 &
+node server.js 2001 &
+node server.js 2002 &
+```
+
+## Installation et éxcution locale
+```
+git clone https://github.com/julien-riel/api-tester.git
+cd api-tester
+npm install
+npm start
+```
+
+# Docker
+<aside class="warning">
+Le fichier Dockerfile n'est pas testé.
+</aside>
+
+## Construire l'image 
+```
+docker build -t <your username>/api-tester .
+```
+
+## Exécuter l'image
+```
+docker run -p 49160:8080 -d <your username>/node-web-app
+```
