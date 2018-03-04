@@ -1,0 +1,24 @@
+{
+  "name": "api-tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julien-riel/api-tester.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julien-riel/api-tester/issues"
+  },
+  "homepage": "https://github.com/julien-riel/api-tester#readme",
+  "dependencies": {
+    "config": "^1.30.0",
+    "superagent": "^3.8.2",
+    "sync-request": "^5.0.0"
+  }
+}
