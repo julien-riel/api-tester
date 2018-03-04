@@ -60,9 +60,7 @@ npm start
 ```
 
 # Docker
-<aside class="warning">
-Le fichier Dockerfile n'est pas testé.
-</aside>
+Note: Le fichier Dockerfile n'est pas encore testé.
 
 ## Construire l'image 
 ```
@@ -71,5 +69,5 @@ docker build -t <your username>/api-tester .
 
 ## Exécuter l'image
 ```
-docker run -p 49160:8080 -d <your username>/node-web-app
+docker run -p 3000:3000 -d <your username>/node-web-app
 ```
