@@ -33,9 +33,8 @@ Retourne le resultat d'exécution. Par exemple:
     [
         {
             "counter": 1,
-            "url": "https://158fgrohl5.execute-api.ca-central-1.amazonaws.com/prod?string=laval",
-            "second": 0,
-            "millisecond": 510.813041
+            "url": "https://exemple.org/",
+            "milliseconds": 510.813041
         }
     ],
 ...
@@ -60,14 +59,14 @@ npm start 2002 &
 ```
 
 # Docker
-Note: Le fichier Dockerfile n'est pas encore testé.
+
+## Exécuter l'image
+```
+docker run -p 3000:3000 --env url=http://google.com jriel/api-tester
+```
 
 ## Construire l'image 
 ```
 docker build -t jriel/api-tester .
 ```
 
-## Exécuter l'image
-```
-docker run -p 3000:3000 --env url=http://google.com jriel/api-tester
-```
