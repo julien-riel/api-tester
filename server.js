@@ -10,11 +10,19 @@ app.use(bodyParser.json());
 
 // server global variables
 let port = process.env.port || process.argv[2] || 3000 ;
-console.log('Détection du port:', port);
+
+let configFromFile = config.get('remoteConfig');
+let configWithEnv = {
+    url: process.env.url  || configFromFile.url,
+    nbTime: process.env.nbTime || configFromFile.nbTime,
+    sleepTime: process.env.sleepTime || configFromFile.sleepTime,
+    showResponse: process.env.showResponse || configFromFile.showResponse,
+    appendUuid: process.env.appendUuid || configFromFile.appendUuid
+};
 
 // Les valeurs par défaut de l'application
 let remoteConfig = {
-    object : config.get('remoteConfig')
+    object : configWithEnv
 };
 let running = false;
 let callCounter = 0;
@@ -32,12 +40,15 @@ function sendTestResult(res) {
 // TODO : Corriger second et millisecond
 function addTestResult(counter, url, startTimer) {
     let endTimer = process.hrtime(startTimer);
+
+    const nanoseconds = (endTimer[0] * 1e9) + endTimer[1];
+	const milliseconds = nanoseconds / 1e6;
+    
     timerResults.push([
         {
             counter: counter,
             url: url,
-            second: endTimer[0],
-            millisecond: endTimer[1]/1000000
+            milliseconds: milliseconds
         }
     ]);
 }
@@ -59,9 +70,8 @@ function doOneTestAndContinue(res) {
     .get(url)
     .end((apiErr, apiResponse) => {
         if (apiErr) {throw apiErr;}
-
         if (remoteConfig.object.showResponse == true) {
-            console.log(apiResponse.status + ' ' + apiResponse.body);
+            console.log(apiResponse.status + ' ' + apiResponse.text);
         } 
         
         callCounter++;
