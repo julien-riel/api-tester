@@ -64,10 +64,10 @@ Note: Le fichier Dockerfile n'est pas encore testé.
 
 ## Construire l'image 
 ```
-docker build -t <your username>/api-tester .
+docker build -t jriel/api-tester .
 ```
 
 ## Exécuter l'image
 ```
-docker run -p 3000:3000 -d <your username>/node-web-app
+docker run -p 3000:3000 --env url=http://google.com jriel/api-tester
 ```
